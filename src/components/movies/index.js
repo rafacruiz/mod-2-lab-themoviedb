@@ -1,0 +1,1 @@
+export { default as ListMovie } from './movie-list/list-movie';

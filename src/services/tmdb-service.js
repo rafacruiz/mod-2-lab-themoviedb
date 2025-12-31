@@ -3,7 +3,8 @@ import axios from "axios";
 const http = axios.create({
   baseURL: import.meta.env.VITE_TMDB_BASE_API_URL,
   headers: {
-    Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+    accept: 'application/json',
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_READ_TOKEN}`,
   },
 });
 
@@ -27,7 +28,19 @@ const postersBaseUrl = import.meta.env.VITE_TMDB_BASE_IMAGES_URL;
  * @param {Number} params.limit           - Limit the amount of movies (min:1 max:20).
  * @returns {Object[]}
  */
-export const listMovies = (params = {}) => {
+export const listMovies = async(params = {}) => {
+  const list = await http.get('/discover/movie');
+    
+  const data = list.results.map(movie => (
+      {
+        id: movie.id,
+        title: movie.title,
+        rating: movie.vote_average,
+        posterUrl: movie.poster_path,
+      }
+    ))
+
+  return data;
 }
 
 /**
