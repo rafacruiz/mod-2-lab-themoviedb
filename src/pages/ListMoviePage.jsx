@@ -1,10 +1,10 @@
 import { LayoutPage } from "../components/layout";
-import { ListMovie } from "../components/movies";
+import { MovieList } from "../components/movies";
 
 function ListMoviePage() {
     return (
         <LayoutPage>
-            <ListMovie />
+            <MovieList />
         </LayoutPage>
     );
 }

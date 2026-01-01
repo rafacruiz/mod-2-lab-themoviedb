@@ -4,7 +4,7 @@ const http = axios.create({
   baseURL: import.meta.env.VITE_TMDB_BASE_API_URL,
   headers: {
     accept: 'application/json',
-    Authorization: `Bearer ${import.meta.env.VITE_TMDB_READ_TOKEN}`,
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_TOKEN}`,
   },
 });
 
@@ -36,7 +36,7 @@ export const listMovies = async(params = {}) => {
         id: movie.id,
         title: movie.title,
         rating: movie.vote_average,
-        posterUrl: movie.poster_path,
+        posterUrl: `${postersBaseUrl}/${movie.poster_path}`,
       }
     ))
 
