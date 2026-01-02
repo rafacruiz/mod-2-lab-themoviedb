@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as MoviesService from '../../../services/tmdb-service';
 import MovieItem from '../movie-item/movie-item';
+import { Link } from 'react-router-dom';
 
 function MovieList() {
 
@@ -20,13 +21,12 @@ function MovieList() {
     } else {
         return (
             <div className="container py-4">
-                
-                <h4>Lista de peliculas</h4>
-                
                 <div className='row g-4'>
                     {movies.map(movie => (
                         <div  className='col-md-3' key={ movie.id } >
-                            <MovieItem movie={ movie } />
+                            <Link to={ '/movie/'+movie.id }>
+                                <MovieItem movie={ movie } />
+                            </Link>
                         </div>
                     )) }
                 </div>
