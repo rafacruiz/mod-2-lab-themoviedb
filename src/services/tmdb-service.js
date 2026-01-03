@@ -28,7 +28,7 @@ const postersBaseUrl = import.meta.env.VITE_TMDB_BASE_IMAGES_URL;
  * @param {Number} params.limit           - Limit the amount of movies (min:1 max:20).
  * @returns {Object[]}
  */
-export const listMovies = async(params = {}) => {
+export const listMovies = async (params = {}) => {
   const list = await http.get('/discover/movie');
     
   const data = list.results.map(movie => (
@@ -50,5 +50,6 @@ export const listMovies = async(params = {}) => {
  * @param {*} id      - Movie identifier
  * @returns {Object}
  */
-export const getMovie = (id) => {
+export const getMovie = async (id) => {
+  return await http.get('/movie/' + id);
 }
