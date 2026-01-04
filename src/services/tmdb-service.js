@@ -31,16 +31,14 @@ const postersBaseUrl = import.meta.env.VITE_TMDB_BASE_IMAGES_URL;
 export const listMovies = async (params = {}) => {
   const list = await http.get('/discover/movie');
     
-  const data = list.results.map(movie => (
-      {
-        id: movie.id,
-        title: movie.title,
-        rating: movie.vote_average,
-        posterUrl: `${postersBaseUrl}/${movie.poster_path}`,
-      }
-    ))
-
-  return data;
+  return list.results.map(movie => (
+    {
+      id: movie.id,
+      title: movie.title,
+      rating: movie.vote_average,
+      posterUrl: `${postersBaseUrl}/${movie.poster_path}`,
+    }
+  ));
 }
 
 /**
@@ -51,5 +49,15 @@ export const listMovies = async (params = {}) => {
  * @returns {Object}
  */
 export const getMovie = async (id) => {
-  return await http.get('/movie/' + id);
+  const movieDetails = await http.get('/movie/' + id);
+  
+  return {
+    id: movieDetails.id,
+    title: movieDetails.title,
+    rating: movieDetails.vote_average,
+    posterUrl: `${postersBaseUrl}/${movieDetails.poster_path}`,
+    description: movieDetails.overview,
+    date: movieDetails.release_date,
+    time: movieDetails.runtime
+  }
 }

@@ -29,10 +29,52 @@ function MovieDetails ({ id, setJumbotronTitle }) {
         };
     }, [movie, setJumbotronTitle]);
 
+    if (!movie) return null;
+
     return (
-        <div>
-            { movie && 
-                movie.title }
+        <div className="container my-5">
+            <div className="row g-4">
+
+                <div className="col-md-4">
+                    <img
+                        src={movie.posterUrl}
+                        alt={movie.title}
+                        className="img-fluid rounded shadow-sm"
+                    />
+                </div>
+
+                <div className="col-md-8">
+                    <div className="d-flex align-items-start justify-content-between mb-3">
+                        <h1 className="fw-bold mb-0">{movie.title}</h1>
+
+                        <span
+                            className="
+                                badge text-bg-warning text-dark
+                                rounded-circle
+                                d-flex align-items-center justify-content-center"
+                            style={{ width: "48px", height: "48px" }}
+                            aria-label={`Valoración ${movie.rating}`}
+                        >
+                            {movie.rating.toFixed(1)}
+                        </span>
+                    </div>
+
+                    <p className="text-muted mb-2">
+                        {movie.date} · {movie.time} min
+                    </p>
+
+                    <div className="mb-3">
+                        
+                    </div>
+
+                    <p className="lead">{movie.description}</p>
+                    <div className="mt-4">
+                        <button className="btn btn-outline-secondary">
+                        ← Volver
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
