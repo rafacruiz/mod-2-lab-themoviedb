@@ -28,17 +28,27 @@ const postersBaseUrl = import.meta.env.VITE_TMDB_BASE_IMAGES_URL;
  * @param {Number} params.limit           - Limit the amount of movies (min:1 max:20).
  * @returns {Object[]}
  */
-export const listMovies = async (params = {}) => {
-  const list = await http.get('/discover/movie');
-    
-  return list.results.map(movie => (
-    {
+export const listMovies = async ({ page }) => {
+  const listMovies = await http.get('/discover/movie', { params: { page } });
+  
+  const movies = listMovies.results.map(movie => {
+    const rating = movie.vote_average.toFixed(1);
+
+    const data = {
       id: movie.id,
       title: movie.title,
-      rating: movie.vote_average,
+      rating: rating,
       posterUrl: `${postersBaseUrl}/${movie.poster_path}`,
     }
-  ));
+    
+    return data;
+  });
+
+  return {
+    page: listMovies.page,
+    pages_total: listMovies.total_pages,
+    results: movies
+  };
 }
 
 /**
@@ -54,7 +64,7 @@ export const getMovie = async (id) => {
   return {
     id: movieDetails.id,
     title: movieDetails.title,
-    rating: movieDetails.vote_average,
+    rating: movieDetails.vote_average.toFixed(1),
     posterUrl: `${postersBaseUrl}/${movieDetails.poster_path}`,
     description: movieDetails.overview,
     date: movieDetails.release_date,

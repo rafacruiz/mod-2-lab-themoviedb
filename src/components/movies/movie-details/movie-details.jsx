@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as MoviesService from '../../../services/tmdb-service';
+import { Link } from "react-router-dom";
 
 function MovieDetails ({ id, setJumbotronTitle }) {
 
@@ -55,7 +56,7 @@ function MovieDetails ({ id, setJumbotronTitle }) {
                             style={{ width: "48px", height: "48px" }}
                             aria-label={`Valoración ${movie.rating}`}
                         >
-                            {movie.rating.toFixed(1)}
+                            {movie.rating}
                         </span>
                     </div>
 
@@ -69,9 +70,9 @@ function MovieDetails ({ id, setJumbotronTitle }) {
 
                     <p className="lead">{movie.description}</p>
                     <div className="mt-4">
-                        <button className="btn btn-outline-secondary">
+                        <Link to={-1} className="btn btn-outline-secondary">
                         ← Volver
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
