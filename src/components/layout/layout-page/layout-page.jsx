@@ -1,8 +1,10 @@
+import { Jumbotron } from "../../ui";
 
-function LayoutPage({ children }) {
+function LayoutPage({ children, title }) {
 
   return (
     <>
+        <Jumbotron title={ title } />
         <div className="container py-2">
           { children }
         </div>

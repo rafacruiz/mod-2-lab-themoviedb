@@ -57,7 +57,10 @@ function MovieList() {
                     {movies.map(movie => (
                         <div  className='col-md-3' key={ movie.id } >
                             <Link to={ '/movie/'+movie.id }>
-                                <MovieItem movie={ movie } handleFavorite={ handleFavorite } isFavorite={ isFavorite }/>
+                                <MovieItem 
+                                    movie={ movie } 
+                                    handleFavorite={ handleFavorite } 
+                                    isFavorite={ isFavorite } />
                             </Link>
                         </div>
                     )) }
